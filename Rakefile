@@ -33,7 +33,8 @@ begin
     s.authors = ['Neeraj Singh']
     s.files = FileList["[A-Z]*", "{app,config,lib}/**/*", 'init.rb']
 
-    s.add_dependency('will_paginate', '>= 3.0.pre2')
+    s.add_dependency('will_paginate', '= 3.0.pre2')
+    s.add_dependency('meta_search', '= 1.0.1')
 
     s.add_development_dependency 'flexmock', '>= 0.8.7'
     s.add_development_dependency 'shoulda', '>= 2.11.3'
