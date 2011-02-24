@@ -37,23 +37,23 @@ module AdminData
 
     def quick_search
       @page_title = "Search #{@klass.name.underscore}"
-      order = default_order
+      default_order
 
       if params[:base]
         klass = Util.camelize_constantize(params[:base])
         model = klass.find(params[:model_id])
         has_many_proxy = model.send(params[:children].intern)
+        @search = has_many_proxy
+        child_klass = ActiveRecordUtil.new(klass).klass_for_association_type_and_name(:has_many, params[:children])
+        @search = child_klass.unscoped.send(:search, params[:search])
         @total_num_of_children = has_many_proxy.send(:count)
-        h = { :page => params[:page], :per_page => per_page, :order => order }
+        h = { :page => params[:page], :per_page => per_page }
         @records = has_many_proxy.send(:paginate, h)
       else
         @search = @klass.unscoped.send(:search, params[:search])
-        puts @search.to_sql
-        params[:query] = params[:query].strip unless params[:query].blank?
         cond = build_quick_search_conditions(@klass, params[:query])
         h = { :page => params[:page], :per_page => per_page, :conditions => cond }
         @records = @search.paginate(h)
-        puts @records.inspect
       end
       respond_to {|format| format.html}
     end
@@ -64,7 +64,7 @@ module AdminData
       hash = build_advance_search_conditions(@klass, params[:adv_search])
       relation = hash[:cond]
       errors = hash[:errors]
-      order = default_order
+      default_order
 
       respond_to do |format|
         format.html { render }
@@ -125,7 +125,8 @@ module AdminData
     end
 
     def default_order
-      params[:sortby] || "#{@klass.send(:table_name)}.#{@klass.send(:primary_key)} desc"
+      params[:search] ||= {}
+      params[:search][:meta_sort] ||= "#{@klass.send(:primary_key)}.desc"
     end
 
     def set_column_type_info

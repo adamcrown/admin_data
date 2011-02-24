@@ -10,6 +10,6 @@ AdminData.config do |config|
 
   config.column_settings = { 'City'  => { :data => lambda { |model| model.send(:data).to_a.flatten.inspect } } }
 
-  config.columns_order = {'Website' => [:dns_provider, :user_id] }
+  config.columns_order = {'Website' => [:created_at, :updated_at] }
 
 end

@@ -163,6 +163,7 @@ module Search
 
   def build_quick_search_conditions( klass, search_term )
     return nil if search_term.blank?
+    search_term = search_term.strip
     str_columns = klass.columns.select { |column| column.type.to_s =~ /(string|text)/i }
     conditions = str_columns.collect do |column|
       t = Term.new(klass, {:col1 => column.name, :col2 => 'contains', :col3 => search_term}, 'quick_search')

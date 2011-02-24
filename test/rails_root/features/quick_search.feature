@@ -100,9 +100,10 @@ Feature: quick search
     Then I should see tabular attributes for website with custom columns order
 
   @javascript
-  Scenario: quick search for city with custom columns header
+  Scenario: quick search for city with custom column name
     Given a city exists
     Given I visit admin_data page
+    When configured to display City column :name as "Custom Column Header"
     When I select "city" from "drop_down_klasses"
     Then I should see tabular attributes for city with custom column headers
 

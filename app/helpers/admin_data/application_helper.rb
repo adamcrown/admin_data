@@ -7,7 +7,7 @@ module AdminData
     end
 
     def column_title(klass, column)
-      AdminData.config.column_headers[klass.name].try(:fetch,column.intern, nil) || column
+      AdminData.config.column_headers[klass.name].try(:fetch, column.intern, nil) || column
     end
 
     # AdminData.config.columns_order might not list all the columns of a given table. However

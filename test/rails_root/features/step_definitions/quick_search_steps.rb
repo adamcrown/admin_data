@@ -6,10 +6,10 @@ end
 
 Then /^table should have additional column phone_numbers with valid data$/ do
   data = tableish('table.table tr', 'th,td')
-  data[0][0].should == "id"
-  data[0][1].should == "phone_numbers"
-  data[0][2].should == "first_name"
-  data[0][3].should == "last_name"
+  data[0][0].should == "Id \342\226\274"
+  data[0][1].should == "Phone numbers"
+  data[0][2].should == "First name"
+  data[0][3].should == "Last name"
   user = User.find(data[1][0].to_i)
   assert_equal user.phone_numbers.map(&:number).join(', '),data[1][1]
 end
@@ -50,19 +50,19 @@ end
 
 Then /^I should see tabular attributes for website with custom columns order$/ do
   data = tableish('table.table tr', 'td,th').flatten
-  data[0].should == "id"
-  data[1].should == "dns_provider"
-  data[2].should == "user_id"
-  data[3].should == "url"
-  data[4].should == "created_at"
-  data[5].should == "updated_at"
+  data[0].should == "Id \342\226\274"
+  data[1].should == "Created at"
+  data[2].should == "Updated at"
+  data[3].should == "Url"
+  data[4].should == "User"
+  data[5].should == "Dns provider"
 end
 
 Then /^I should see tabular attributes for city with custom column headers$/ do
   data = tableish('table.table tr', 'td,th').flatten
-  data[0].should == "ID"
-  data[1].should == "City Name"
-  data[2].should == "City Info"
-  data[3].should == "created_at"
-  data[4].should == "updated_at"
+  data[0].should == "Id"
+  data[1].should == "Custom column header"
+  data[2].should == "City info"
+  data[3].should == "Created at"
+  data[4].should == "Updated at"
 end
