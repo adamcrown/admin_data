@@ -45,9 +45,9 @@ Feature: quick search
       | Mary       | Jane      |
       | John       | Smith     |
     Given I visit quick_search page
-    When I select "id asc" from "sortby"
+    When I follow "First name" within "table#view_table"
     When I press "Search"
-    Then verify that user "first_name" is "Mary"
+    Then verify that user "first_name" is "John"
     Then verify that user "last_name" is "Jane"
 
   Scenario: quick search with search term
