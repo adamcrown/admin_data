@@ -12,7 +12,10 @@
   <thead>
      <tr>
       <% columns_order(klass).each do |column| %>
-        <th> <%= column_title(klass, column) %> </th>
+        <th>
+          <%#= column_title(klass, column) %>
+          <%= sort_link @search, column.intern %>
+        </th>
       <% end %>
     </tr>
   </thead>
