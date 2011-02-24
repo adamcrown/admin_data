@@ -36,7 +36,7 @@ module AdminData
     end
 
     # Rails method merge_conditions ANDs all the conditions. I need to ORs all the conditions
-    def self.or_merge_conditions(klass, *conditions)
+    def self.or_merge_conditions(relation, *conditions)
       s = ') OR ('
       cond = conditions.inject([]) do |sum, condition|
         condition.blank? ? sum : sum << klass.send(:sanitize_sql, condition)

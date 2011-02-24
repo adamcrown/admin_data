@@ -14,7 +14,7 @@
       <% columns_order(klass).each do |column| %>
         <th>
           <%#= column_title(klass, column) %>
-          <%= sort_link @search, column.intern %>
+          <%= sort_link @search, column.intern, :query => params[:query] %>
         </th>
       <% end %>
     </tr>

@@ -47,11 +47,13 @@ module AdminData
         h = { :page => params[:page], :per_page => per_page, :order => order }
         @records = has_many_proxy.send(:paginate, h)
       else
-        @search = @klass.send(:search, params[:search])
+        @search = @klass.unscoped.send(:search, params[:search])
+        puts @search.to_sql
         params[:query] = params[:query].strip unless params[:query].blank?
         cond = build_quick_search_conditions(@klass, params[:query])
         h = { :page => params[:page], :per_page => per_page, :conditions => cond }
         @records = @search.paginate(h)
+        puts @records.inspect
       end
       respond_to {|format| format.html}
     end
