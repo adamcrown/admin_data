@@ -8,6 +8,9 @@ gem 'ruby-debug'
 
 gem 'faker'
 
+gem 'meta_where'
+gem 'meta_search'
+
 #gem 'admin_data', :git => 'git://github.com/neerajdotname/admin_data.git'
 gem 'admin_data', :path => File.expand_path("../../..", __FILE__)
 
